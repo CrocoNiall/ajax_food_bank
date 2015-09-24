@@ -7,6 +7,22 @@ console.log('Hello Niall')
 
 })
 
+var form = $('#addFood')
+  form.on('submit', function(){
+    event.preventDefault()
+
+
+      $.ajax({
+      url: '/foods',
+      type: 'post',
+      data: form.serialize(),
+      success: function(result) {
+          render([result])
+      }
+  });
+
+})
+
 
 
 function render(response){
