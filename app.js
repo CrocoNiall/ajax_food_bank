@@ -77,7 +77,7 @@ app.delete("/foods/:id", function (req, res) {
     foods[i].id.toString() === req.params.id ? position = i : position 
     console.log(foods[i]);
   }
-  res.json(foods[position])
+  // res.json(foods[position])
   foods.splice(position, 1)
   
 

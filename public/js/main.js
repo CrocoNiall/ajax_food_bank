@@ -5,8 +5,6 @@ console.log('Hello Niall')
     render(response);
   });
 
-
-
 })
 
 
@@ -14,25 +12,49 @@ console.log('Hello Niall')
 function render(response){
   console.log(response)
 
-  for (var i = 0; i < response.length -1; i++){
-    var foodItem = '<li data-id=' + response[i].id + '>'
+  for (var i = 0; i < response.length ; i++){
+    var foodItem = '<li id="' + response[i].id + '">'
     foodItem += '<b>' + response[i].name + '</b>'
     foodItem += ' Rateing: ' + '<i>' + response[i].yumminess + '</i>'
+    foodItem += '<button id="' + response[i].id +'" name="subject" type="submit" value="' + response[i].id +'">Delete</button><br><br>'
     foodItem += '</li>'
-    foodItem += '<button class="deleteButton" name="subject" type="submit" value="' + response[i].id +'">Delete</button><br><br>'
+    var id = response[i].id
     console.log(foodItem)
-    addToPage(foodItem);
+    addToPage(foodItem, id);
   }
 }
 
 
-function addToPage(item){
+function addToPage(item, id){
   var results = $('#food-list');
   results.hide().append(item).fadeIn('slow');
-
-  $('.deleteButton').on('click', function(event){
-
-    deleteRecord(this.value);
+  console.log(id)
+  $('#' + id).on('click', function(event){
+    
+    removeRecord(this.value, id);
   })
+
+
+
+function removeRecord(valueId, id) {
+  $('#' + id).slideUp('slow')
+  deleteRecord(id)
+  console.log(id)
+  }
+
+
+function deleteRecord(id){
+  $.ajax({
+    url: '/foods/' + id,
+    type: 'DELETE',
+    success: function(result) {
+        console.log(result)
+    }
+});
+}
+
+
+
+
 
 }
