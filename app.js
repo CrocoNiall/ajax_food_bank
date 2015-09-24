@@ -44,10 +44,24 @@ app.get("/foods", function (req, res) {
 
 //CREATE
 app.post("/foods", function (req, res) {
+//sets vars
+  var newFood = req.body
+  var vals = []
 
-  res.json(req.body)
-  var jsonResponse = req.body
-  foods.push(jsonResponse)
+  //puts all id's into array
+  for (var i = 0; i < foods.length ; i++){
+    vals.push(parseInt(foods[i].id))
+  }  
+
+//finds biggest value in array and incraments by 1
+  var newIndex = Math.max.apply( Math, vals ) + 1;
+
+//adds a key value pair with new id to the object 
+  newFood.id = newIndex
+
+//generates new responce object and adds to new foods array
+  res.json(newFood)
+  foods.push(newFood)
 
 
   // add a unique id
@@ -63,7 +77,7 @@ app.delete("/foods/:id", function (req, res) {
     foods[i].id.toString() === req.params.id ? position = i : position 
     console.log(foods[i]);
   }
-  res.json(foods[i])
+  res.json(foods[position])
   foods.splice(position, 1)
   
 
