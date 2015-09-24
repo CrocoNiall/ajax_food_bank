@@ -18,6 +18,7 @@ var form = $('#addFood')
       data: form.serialize(),
       success: function(result) {
           render([result])
+          console.log(result)
       }
   });
 
@@ -44,7 +45,7 @@ function render(response){
 function addToPage(item, id){
   var results = $('#food-list');
   results.hide().append(item).fadeIn('slow');
-  console.log(id)
+
   $('#' + id).on('click', function(event){
     
     removeRecord(this.value, id);
@@ -55,7 +56,7 @@ function addToPage(item, id){
 function removeRecord(valueId, id) {
   $('#' + id).slideUp('slow')
   deleteRecord(id)
-  console.log(id)
+  console.log('deleting' + id)
   }
 
 

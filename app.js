@@ -73,11 +73,12 @@ app.post("/foods", function (req, res) {
 app.delete("/foods/:id", function (req, res) {
   console.log("hitting delete route");
   var position
-  for (var i = 0; i < foods.length -1; i++){
+  for (var i = 0; i < foods.length ; i++){
     foods[i].id.toString() === req.params.id ? position = i : position 
-    console.log(foods[i]);
+    console.log('deleting  ' + foods[i]);
   }
   // res.json(foods[position])
+  console.log('Item to be deleted ' + position)
   foods.splice(position, 1)
   
 
